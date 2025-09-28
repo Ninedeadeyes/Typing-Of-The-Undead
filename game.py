@@ -55,7 +55,7 @@ gameover_img = pygame.image.load('assets/arts/gameover.png')
 gameover_img = pygame.transform.scale(gameover_img, (600, 350)) 
 
 screen=pygame.display.set_mode((WIDTH,HEIGHT))
-pygame.display.set_caption("Typing of the undead")
+pygame.display.set_caption("Typing Of The Undead")
 
 surface=pygame.Surface((WIDTH,HEIGHT),pygame.SRCALPHA)
 timer=pygame.time.Clock()
@@ -168,10 +168,10 @@ class Medikit:
 
     def draw(self):
         screen.blit(self.image, self.rect)
-        screen.blit(font.render(self.text, True, 'white'), (self.x_pos + 40, self.y_pos))
+        screen.blit(font.render(self.text, True, 'white'), (self.x_pos + 60, self.y_pos))
         act_len = len(active_string)
         if active_string == self.text[:act_len]:
-            screen.blit(font.render(active_string, True, 'blue'), (self.x_pos + 40, self.y_pos))
+            screen.blit(font.render(active_string, True, 'blue'), (self.x_pos + 60, self.y_pos))
 
 class Button:
     def __init__(self,x_pos,y_pos,text,clicked,surf):
@@ -368,26 +368,36 @@ def check_high_score():
         file.close()
 
 def get_rank(score):
-    if score >= 22500:
+    if score >= 30000:
         return "Supreme Commander"
-    elif score >= 20000:
+    elif score >= 27500:
+        return "Field Marshal"
+    elif score >= 25000:
         return "General"
-    elif score >= 17500:
+    elif score >= 22500:
         return "Colonel"
-    elif score >= 15000:
+    elif score >= 20000:
+        return "Lieutenant Colonel"
+    elif score >= 17500:
         return "Major"
-    elif score >= 12500:
+    elif score >= 15000:
         return "Captain"
-    elif score >= 10000:
+    elif score >= 12500:
         return "Lieutenant"
+    elif score >= 10000:
+        return "2nd Lieutenant"
     elif score >= 7500:
-        return "Sergeant"    
+        return "Sergeant"  
     elif score >= 5000:
+        return "Lance Corporal"  
+    elif score >= 3000:
         return "Corporal"
-    elif score >= 2500:
+    elif score >= 2000:
         return "Private"
+    elif score >= 1000:
+        return "Cadet"
     else:
-        return "Rookie"
+        return "New Recruit"
 run=True
 
 while run:
