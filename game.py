@@ -55,7 +55,7 @@ gameover_img = pygame.image.load('assets/arts/gameover.png')
 gameover_img = pygame.transform.scale(gameover_img, (600, 350)) 
 
 screen=pygame.display.set_mode((WIDTH,HEIGHT))
-pygame.display.set_caption("Typing Of The Undead")
+pygame.display.set_caption("Typing of the undead")
 
 surface=pygame.Surface((WIDTH,HEIGHT),pygame.SRCALPHA)
 timer=pygame.time.Clock()
@@ -224,8 +224,8 @@ def draw_screen():
 def draw_pause():
     choice_commits=copy.deepcopy(choices)  # copy of the choices list, changes made to choice_commits inside this function won't affect the original choices list.
     surface=pygame.Surface((WIDTH,HEIGHT), pygame.SRCALPHA)  # create a new surface 
-    pygame.draw.rect(surface, (100, 100, 100), (100, 120, 800, 700), 0, 5) #Draw Semi-Transparent Background Box  eg:100 makes it transparent 
-    pygame.draw.rect(surface,(100,100,100,200),(100,120,800,700),5,5)  #Draw Border Around the Box
+    pygame.draw.rect(surface, (100, 100, 100), (100, 120, 800, 700), 0, 5) #Draw  Background Box 
+    pygame.draw.rect(surface,(100,100,100,200),(100,120,800,700),5,5)  #Draw Border Around the Box 200 makes it trasparent
     
     #define buttons for pause menu 
     resume_btn=Button(165,200,">",False,surface)  #create the resume button, False =not clicked 
@@ -311,14 +311,11 @@ def generate_level():
     if level <= 6:
         num_words = level
 
-    else:
+    elif level <=12:
         num_words = 6 + (level - 6) // 3     # after level 6 the amount of words increase to 1 words per 3 level
 
-#    elif level <=12:
- #       num_words = 6 + (level - 6) // 3     # after level 6 the amount of words increase to 1 words per 3 level
-
-  #  else:
-   #     num_words = 6 + (level - 6) // 2      # after level 12 the amount of words increase to 1 words per 2 levels 
+    else:
+        num_words = 6 + (level - 6) // 2      # after level 12 the amount of words increase to 1 words per 2 levels 
    
     for i in range(num_words): #Loops once for each word to be generated, based on the current level. Example: If level = 3, it will generate 3 words.
         speed=random.randint(2,3)
@@ -371,34 +368,26 @@ def check_high_score():
         file.close()
 
 def get_rank(score):
-    if score >= 27500:
+    if score >= 22500:
         return "Supreme Commander"
-    elif score >= 25000:
-        return "Field Marshal"
-    elif score >= 22500:
-        return "General"
     elif score >= 20000:
-        return "Colonel"
+        return "General"
     elif score >= 17500:
-         return "Lieutenant Colonel"
-    elif score >= 15000:       
+        return "Colonel"
+    elif score >= 15000:
         return "Major"
     elif score >= 12500:
         return "Captain"
     elif score >= 10000:
-        return " 1st Lieutenant"
-    elif score >= 75000:
-        return " 2nd Lieutenant"
-    elif score >= 5000:
+        return "Lieutenant"
+    elif score >= 7500:
         return "Sergeant"    
-    elif score >= 2500:
+    elif score >= 5000:
         return "Corporal"
-    elif score >= 1500:
+    elif score >= 2500:
         return "Private"
-    elif score >= 1000:
-        return "Cadet"
     else:
-        return "New Recruit"
+        return "Rookie"
 run=True
 
 while run:
@@ -459,7 +448,6 @@ while run:
             game_over=False
             paused=False
             score=0
-            lives=5
             play_music()
 
         elif resume_butt:
@@ -518,6 +506,7 @@ while run:
         game_over=True
         paused=True
         level=1
+        lives=5
         word_objects=[]
         new_level=True
         check_high_score()
